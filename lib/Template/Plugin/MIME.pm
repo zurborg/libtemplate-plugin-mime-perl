@@ -27,12 +27,14 @@ our $NAME = __PACKAGE__;
 
 =head1 SYNOPSIS
 
-Use this module in a template:
+Use this plugin inside a template:
 
     [% USE mail = MIME %]
     
-    [% img = attach('image.png') %]
+    [% cid_of_image = mail.attach('image.png') %]
     
+    <img src="cid:[% cid_of_image %]" />
+
 =cut
 
 sub load($$) {
