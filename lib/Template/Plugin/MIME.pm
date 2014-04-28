@@ -8,8 +8,15 @@ use base qw( Template::Plugin );
 use MIME::Entity;
 use MIME::Base64;
 use Sys::Hostname;
-use File::LibMagic;
 use Digest::SHA;
+use Try::Tiny;
+use Carp;
+
+BEGIN {
+    try {
+        require File::LibMagic;
+    };
+}
 
 =head1 NAME
 
@@ -50,7 +57,9 @@ sub new($$@) {
         attachments => {},
         hostname => $params{hostname} || hostname
     };
-    $self->{magic} = File::LibMagic->new;
+    try {
+        $self->{magic} = File::LibMagic->new;
+    };
     return $self;
 }
 
@@ -109,7 +118,16 @@ sub insert($$;$) {
         return $cid;
     }
     
-    $mimetype ||= $self->{magic}->checktype_filename($path);
+    my $mimetype = $options->{Type};
+    
+    try {
+        return unless defined $self->{magic};
+        $mimetype ||= $self->{magic}->checktype_filename($path);
+    } catch {
+        carp "libmagic: $_";
+    };
+    
+    $mimetype ||= 'application/octet-stream';
     
     my $part = MIME::Entity->build(
         Path => $path,
