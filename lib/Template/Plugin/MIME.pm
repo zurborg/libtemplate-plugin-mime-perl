@@ -51,11 +51,20 @@ sub load($$) {
     }, $class;
 }
 
-sub new($$@) {
-    my ($self, $context, %params) = @_;
+sub new($$$) {
+    my ($self, $context, $params) = @_;
+    unless (ref $self) {
+        croak "cannot instanciate myself, consider using $self->load!";
+    }
     $context->{$NAME} = {
-        attachments => {},
-        hostname => $params{hostname} || hostname
+        attachments => {
+            all => [],
+            index => {
+                files => {},
+                cids => {},
+            }
+        },
+        hostname => $params->{hostname} || hostname || 'localhost',
     };
     try {
         $self->{magic} = File::LibMagic->new;
@@ -72,26 +81,21 @@ sub base64($$) {
 sub attachments($$) {
     my ($self, $template) = @_;
     my $context = $template->context;
-    return $context->{$NAME}->{attachments};
+    return $context->{$NAME}->{attachments}->{all};
 }
 
 sub merge {
-    my ($self, $template, $part) = @_;
+    my ($self, $template, $mail) = @_;
     my $context = $template->context;
     my $attachments = $self->attachments($template);
     
-    my $multipart = MIME::Entity->build(
-        Top => 0,
-        Type => 'multipart/related'
-    ) or confess $@;
-    
-    $multipart->add_part($mail);
+    $mail->make_multipart('related');
     
     foreach my $attachment (@$attachments) {
-        $multipart->add_part($attachment);
+        $mail->add_part($attachment);
     }
     
-    return $multipart;
+    return $mail;
 }
     
 =head1 FUNCTIONS
@@ -100,21 +104,25 @@ sub merge {
 
 =cut
 
-sub insert($$;$) {
-    my ($self, $path, $mimetype) = @_;
+sub attach($$;$) {
+    my ($self, $path, $options) = @_;
     my $context = $self->_context;
     my $this = $context->{$NAME};
     
-    if (exists $this->{attachments}->{$path}) {
-        return $this->{attachments}->{$path}->head->get('Content-Id');
+    if (exists $this->{attachments}->{index}->{files}->{$path}) {
+        return $this->{attachments}->{index}->{files}->{$path}->head->get('Content-Id');
+    }
+    
+    unless (-e $path) {
+        croak "file '$path' does not exists!";
     }
     
     my $digest = Digest::SHA->new(256);
-    $digest->addfile($path);
+    $digest->addfile($path) or die $!;
     my $cid = $digest->hexdigest . '@' . $this->{hostname};
     
-    if (exists $this->{attachments}->{$cid}) {
-        $this->{attachments}->{$path} = $this->{attachments}->{$cid};
+    if (exists $this->{attachments}->{index}->{cids}->{$cid}) {
+        $this->{attachments}->{index}->{files}->{$path} = $this->{attachments}->{index}->{cids}->{$cid};
         return $cid;
     }
     
@@ -130,13 +138,15 @@ sub insert($$;$) {
     $mimetype ||= 'application/octet-stream';
     
     my $part = MIME::Entity->build(
+        %$options,
         Path => $path,
         Id => $cid,
         Encoding => 'base64',
         Type => $mimetype,
         Top => 0
     );
-    $this->{attachments}->{$cid} = $this->{attachments}->{$path} = $part;
+    push @{ $this->{attachments}->{all} } => $part;
+    $this->{attachments}->{index}->{cids}->{$cid} = $this->{attachments}->{index}->{files}->{$path} = $part;
     return $cid;
 }
 
