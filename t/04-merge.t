@@ -16,7 +16,7 @@ sub io {
     return $out;
 }
 
-my $cid = io('[%- USE mail = MIME; mail.attach("fourdots.gif") %]');
+my $cid = io('[%- USE MIME; MIME.attach("fourdots.gif") %]');
 
 my $mail = MIME::Entity->build(
     Data => [qw[foo]]

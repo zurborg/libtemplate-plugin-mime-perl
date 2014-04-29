@@ -3,7 +3,7 @@ package Template::Plugin::MIME;
 use warnings;
 use strict;
 
-use base qw( Template::Plugin );
+use base qw( Template::Plugin::Procedural );
 
 use MIME::Entity;
 use MIME::Base64;
@@ -36,9 +36,9 @@ our $NAME = __PACKAGE__;
 
 Use this plugin inside a template:
 
-    [% USE mail = MIME %]
+    [% USE MIME %]
     
-    [% cid_of_image = mail.attach('image.png') %]
+    [% cid_of_image = MIME.attach('image.png') %]
     
     <img src="cid:[% cid_of_image %]" />
 
@@ -241,9 +241,9 @@ sub merge {
 
 This method attaches a file and returns a Content-Id for use within html content, for example.
 
-    [%  USE mail = MIME %]
+    [% USE MIME %]
     
-    [% signature_cid = mail.attach("signature.png") %]
+    [% signature_cid = MIME.attach("signature.png") %]
     
     <img src="cid:[% signature_cid %]" />
 

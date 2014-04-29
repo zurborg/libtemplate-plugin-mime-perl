@@ -16,8 +16,8 @@ sub io {
 }
 
 my $html = io(<<'EOT');
-[%- USE mail = MIME hostname = 'localhost' -%]
-[%- img = mail.attach('fourdots.gif', Encoding => 'Base64', Type => 'image/gif') -%]
+[%- USE MIME hostname = 'localhost' -%]
+[%- img = MIME.attach('fourdots.gif', Encoding => 'Base64', Type => 'image/gif') -%]
 Four Dots: <img src="cid:[% img %]" />
 EOT
 
