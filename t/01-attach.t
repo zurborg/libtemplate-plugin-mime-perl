@@ -1,7 +1,6 @@
 #!perl -T
 
 use Test::More;
-use Modern::Perl;
 
 use Template::Plugin::MIME;
 
