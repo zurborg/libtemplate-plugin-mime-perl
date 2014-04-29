@@ -24,11 +24,11 @@ Template::Plugin::MIME - TemplateToolkit plugin providing a interface to MIME::E
 
 =head1 VERSION
 
-Version 0.1
+Version 0.11
 
 =cut
 
-our $VERSION = '0.1';
+our $VERSION = '0.11';
 
 our $NAME = __PACKAGE__;
 
