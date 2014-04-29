@@ -6,5 +6,11 @@ MANIFEST
 README
 INSTALL
 t/00-load.t
+t/01-attach.t
+t/02-entity.t
+t/03-magic.t
+t/04-merge.t
+t/99-full.t
 t/pod-coverage.t
 t/pod.t
+fourdots.gif
