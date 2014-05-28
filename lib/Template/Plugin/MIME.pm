@@ -327,9 +327,10 @@ David Zurborg, C<< <david at fakenet.eu> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-template-plugin-mime at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Template-Plugin-MIME>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
+Please report any bugs or feature requests through my project management tool
+at L<http://development.david-zurb.org/projects/libtemplate-plugin-mime-perl/issues/new>. I
+will be notified, and then you'll automatically be notified of progress on
+your bug as I make changes.
 
 =head1 SUPPORT
 
@@ -337,10 +338,13 @@ You can find documentation for this module with the perldoc command.
 
     perldoc Template::Plugin::MIME
 
-
 You can also look for information at:
 
 =over 4
+
+=item * Redmine: Homepage of this module
+
+L<http://development.david-zurb.org/projects/libtemplate-plugin-mime-perl>
 
 =item * RT: CPAN's request tracker
 
@@ -359,10 +363,6 @@ L<http://cpanratings.perl.org/d/Template-Plugin-MIME>
 L<http://search.cpan.org/dist/Template-Plugin-MIME/>
 
 =back
-
-
-=head1 ACKNOWLEDGEMENTS
-
 
 =head1 COPYRIGHT & LICENSE
 
