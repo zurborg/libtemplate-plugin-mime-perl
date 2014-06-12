@@ -7,6 +7,7 @@
     PL_FILES            => {},
     PMLIBDIRS           => [qw[ lib ]],
     PREREQ_PM => {
+        'Modern::Perl' => 0,
         'Test::More' => 0,
         'Template' => 2.24,
         'MIME::Entity' => 5.5,
