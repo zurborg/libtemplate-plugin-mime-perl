@@ -1,10 +1,7 @@
 package Template::Plugin::MIME;
 
-use warnings;
-use strict;
-
-use base qw( Template::Plugin::Procedural );
-
+use Modern::Perl;
+use parent qw( Template::Plugin::Procedural );
 use MIME::Entity;
 use MIME::Base64;
 use Sys::Hostname;
@@ -13,7 +10,7 @@ use Try::Tiny;
 use Carp;
 
 BEGIN {
-    try {
+    eval {
         require File::LibMagic;
     };
 }
