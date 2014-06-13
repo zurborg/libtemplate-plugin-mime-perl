@@ -11,7 +11,7 @@
         'Test::More' => 0,
         'Template' => 2.24,
         'MIME::Entity' => 5.5,
-	'Sys::Hostname' => 1.16,
+	'Sys::Hostname' => 1.11,
 	'Digest::SHA' => 5.71,
 	'Try::Tiny' => 0.19,
     },
