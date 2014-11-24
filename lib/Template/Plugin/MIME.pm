@@ -1,6 +1,8 @@
+use strict;
+use warnings;
 package Template::Plugin::MIME;
+# ABSTRACT: TemplateToolkit plugin providing a interface to MIME::Entity
 
-use Modern::Perl;
 use parent qw( Template::Plugin::Procedural );
 use MIME::Entity;
 use MIME::Base64;
@@ -15,17 +17,7 @@ BEGIN {
     };
 }
 
-=head1 NAME
-
-Template::Plugin::MIME - TemplateToolkit plugin providing a interface to MIME::Entity
-
-=head1 VERSION
-
-Version 0.12
-
-=cut
-
-our $VERSION = '0.12';
+# VERSION
 
 our $NAME = __PACKAGE__;
 
@@ -318,55 +310,4 @@ sub attach($$;$) {
     return $cid;
 }
 
-=head1 AUTHOR
-
-David Zurborg, C<< <david at fakenet.eu> >>
-
-=head1 BUGS
-
-Please report any bugs or feature requests through my project management tool
-at L<http://development.david-zurb.org/projects/libtemplate-plugin-mime-perl/issues/new>. I
-will be notified, and then you'll automatically be notified of progress on
-your bug as I make changes.
-
-=head1 SUPPORT
-
-You can find documentation for this module with the perldoc command.
-
-    perldoc Template::Plugin::MIME
-
-You can also look for information at:
-
-=over 4
-
-=item * Redmine: Homepage of this module
-
-L<http://development.david-zurb.org/projects/libtemplate-plugin-mime-perl>
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Template-Plugin-MIME>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/Template-Plugin-MIME>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/Template-Plugin-MIME>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/Template-Plugin-MIME/>
-
-=back
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2013 David Zurborg, all rights reserved.
-
-This program is free software; you can redistribute it and/or modify it under the terms of the ISC license.
-
-=cut
-
-1; # End of Template::Plugin::MIME
+1;

@@ -1,0 +1,32 @@
+Revision history for Template-Plugin-MIME
+
+{{$NEXT}}
+ - added README for github
+ - updated documentation
+ - fixed broken link
+ - use Modern::Perl
+ - add Travis CI configuration
+ - add dependencies for Travis CI
+ - add Modern::Perl to module dependencies
+ - convert README to Markdown
+ - backwards compatibility with perl5.10 and perl5.12
+ - enable Module::Signature
+ - dont make signatures anymore
+
+0.12 2014-05-15
+ - fixed typo in .gitignore
+ - updated synopsis
+ - fail-safe use of File::LibMagic
+ - various improvements.
+ - added testing
+ - updated documentation
+ - added example image for tests
+ - removed dumb iframe shit
+ - updated MANIFEST
+ - updated module prequirements
+ - Modern::Perl no longer needed for tests
+ - fixed test
+ - bump to version 0.11
+ - transformed to procedural variant of template plugin
+ - bump to version 0.12
+
