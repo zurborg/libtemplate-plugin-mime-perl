@@ -33,14 +33,14 @@ Use this plugin inside a template:
 
 =cut
 
-sub load($$) {
+sub load {
     my ($class, $context) = @_;
     bless {
         _CONTEXT => $context,
     }, $class;
 }
 
-sub new($$$) {
+sub new {
     my ($self, $context, $params) = @_;
     unless (ref $self) {
         croak "cannot instanciate myself, consider using $self->load!";
@@ -61,9 +61,9 @@ sub new($$$) {
     return $self;
 }
 
-sub _context($) { shift()->{_CONTEXT} }
+sub _context { shift()->{_CONTEXT} }
 
-sub base64($$) {
+sub base64 {
     return encode_base64($_[1]);
 }
 
@@ -85,7 +85,7 @@ Returns all attached files.
 
 =cut
 
-sub attachments($$) {
+sub attachments {
     my ($self, $template) = @_;
     my $context = $template->context;
     return $context->{$NAME}->{attachments}->{all};
@@ -264,7 +264,7 @@ If all fails, the mime-type "application/octet-stream" is used.
 
 =cut
 
-sub attach($$;$) {
+sub attach {
     my ($self, $path, $options) = @_;
     my $context = $self->_context;
     my $this = $context->{$NAME};
