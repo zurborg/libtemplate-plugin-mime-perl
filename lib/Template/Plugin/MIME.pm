@@ -63,10 +63,6 @@ sub new {
 
 sub _context { shift()->{_CONTEXT} }
 
-sub base64 {
-    return encode_base64($_[1]);
-}
-
 =head1 METHODS FOR USE OUTSIDE TEMPLATE
 
 =cut
@@ -308,6 +304,20 @@ sub attach {
     push @{ $this->{attachments}->{all} } => $part;
     $this->{attachments}->{index}->{cids}->{$cid} = $this->{attachments}->{index}->{files}->{$path} = $part;
     return $cid;
+}
+
+=head2 C<< base64($str) >>
+
+Encodes C<$str> as Base-64.
+
+    [% USE MIME %]
+    
+    <img src="data:image/jpg;base64,[% base64(raw_jpeg_data) %]">
+
+=cut
+
+sub base64 {
+    return encode_base64($_[1]);
 }
 
 1;
